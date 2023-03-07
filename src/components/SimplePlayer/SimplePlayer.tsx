@@ -1,30 +1,43 @@
 import { useState, useRef, useEffect } from 'react'
 import { Container } from './styles'
-import { Play, Pause, SkipForward, SkipBack } from 'phosphor-react'
+import { Play, Pause, SkipForward, SkipBack, Heart } from 'phosphor-react'
+import audioTrack from '../../assets/sounds/98014_538383-lq.mp3'
 
-import audio from '../../assets/sounds/98014_538383-lq.mp3'
+interface IPlayerProps {
+  isSimple?: boolean
+}
 
-export function SimplePlayer() {
+export function SimplePlayer({ isSimple = false }: IPlayerProps) {
+  const [audio, setAudio] = useState('')
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
+  const [likeProps, setLikeProps] = useState({
+    fill: false,
+  })
 
   const audioPlayer = useRef<HTMLAudioElement>(null)
   const progressBar = useRef<HTMLInputElement>(null)
-  const animationRef = useRef(null)
+  const animationRef = useRef(requestAnimationFrame(() => {}))
 
   useEffect(() => {
+    setAudio(audioTrack)
+    console.log(audio)
     if (audioPlayer.current && progressBar.current) {
       const seconds = Math.floor(audioPlayer.current.duration)
       setDuration(seconds)
       progressBar.current.max = seconds.toString()
     }
-  }, [audioPlayer?.current?.onloadedmetadata, audioPlayer?.current?.readyState])
+  }, [
+    audio,
+    audioPlayer?.current?.onloadedmetadata,
+    audioPlayer?.current?.readyState,
+  ])
 
-  const calculateTime = (timeInSeconds: number) => {
+  const calculateTime = (timeInSeconds: number = 0) => {
     const minutes = Math.floor(timeInSeconds / 60)
     const seconds = timeInSeconds % 60
-    const returnedSeconds = seconds < 10 ? `0${seconds}` : seconds
+    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`
     return `${minutes}:${returnedSeconds}`
   }
 
@@ -43,7 +56,7 @@ export function SimplePlayer() {
   }
 
   const whilePlaying = () => {
-    if (progressBar.current && audioPlayer.current) {
+    if (progressBar.current && audioPlayer.current && animationRef.current) {
       const currentTimeInFloat = parseFloat(progressBar.current.value)
       progressBar.current.value = audioPlayer.current.currentTime.toString()
       changePlayerCurrentTime(currentTimeInFloat)
@@ -69,45 +82,61 @@ export function SimplePlayer() {
     }
   }
 
+  const toggleLikeButtonProps = () => {
+    setLikeProps({ fill: !likeProps.fill })
+  }
+
   return (
     <Container>
       <div className="audioPlayer">
         <audio ref={audioPlayer} src={audio} preload="metadata"></audio>
-        <button className="forwardBackward">
-          <SkipBack weight="fill" size={20} />
-        </button>
+        {!isSimple && (
+          <button className="forwardBackward">
+            <SkipBack weight="fill" size={14} />
+          </button>
+        )}
         <button className="playPause" onClick={toggleIsPlaying}>
           {isPlaying ? (
-            <Pause size={20} weight="fill" />
+            <Pause size={14} weight="fill" />
           ) : (
-            <Play weight="fill" size={20} />
+            <Play weight="fill" size={14} />
           )}
         </button>
-        <button className="forwardBackward">
-          <SkipForward size={20} weight="fill" />
-        </button>
+        {!isSimple && (
+          <button className="forwardBackward">
+            <SkipForward size={14} weight="fill" />
+          </button>
+        )}
 
         {/* current time */}
         <div className="currentTime">
-          {duration && !isNaN(duration) && calculateTime(currentTime)}
+          {currentTime ? calculateTime(currentTime) : '0:00'}
         </div>
 
         {/* progress bar */}
 
-        <div>
-          <input
-            ref={progressBar}
-            className="progressBar"
-            type="range"
-            defaultValue={0}
-            onChange={handleRange}
-          />
-        </div>
+        <input
+          ref={progressBar}
+          className="progressBar"
+          type="range"
+          defaultValue={0}
+          onChange={handleRange}
+        />
 
         {/* duration */}
         <div className="duration">
-          {duration && !isNaN(duration) && calculateTime(duration)}
+          {duration ? calculateTime(duration) : ''}
         </div>
+      </div>
+      <div
+        onClick={toggleLikeButtonProps}
+        className={
+          likeProps.fill
+            ? 'likeButtonContainer likeButtonFilled'
+            : 'likeButtonContainer likeButtonOutline'
+        }
+      >
+        <Heart weight={likeProps.fill ? 'fill' : 'bold'} size={16} />
       </div>
     </Container>
   )

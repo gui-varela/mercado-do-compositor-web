@@ -1,7 +1,8 @@
 import { Container, Player, Description, Options } from './styles'
-import { Star, Play, SkipForward, Heart } from 'phosphor-react'
+import { Star } from 'phosphor-react'
 
 import profilePic from '../../assets/musico.png'
+import { SimplePlayer } from '../SimplePlayer/SimplePlayer'
 
 export function Footer() {
   return (
@@ -12,6 +13,8 @@ export function Footer() {
             <Star />
             <h2>Música em destaque</h2>
           </div>
+
+          <div className="VerticalDivider"></div>
 
           <Description>
             <div className="Artist">
@@ -30,14 +33,7 @@ export function Footer() {
           <div className="VerticalDivider"></div>
 
           <Options>
-            <Play weight="fill" size={20} />
-            <div className="ProgressBar">
-              <div className="TimeBar"></div>
-            </div>
-            <span>2:41</span>
-            <SkipForward weight="fill" size={20} />
-            <div className="HorizontalDivider"></div>
-            <Heart weight="bold" size={20} />
+            <SimplePlayer isSimple={true} />
           </Options>
         </footer>
       </Player>

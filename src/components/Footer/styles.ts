@@ -54,10 +54,6 @@ export const Container = styled.div`
   @media screen and (max-width: 900px) {
     footer {
       flex-direction: column;
-
-      h2 {
-        display: none;
-      }
     }
   }
 
@@ -107,6 +103,11 @@ export const Options = styled.div`
   @media screen and (max-width: 900px) {
     & {
       width: 100%;
+      justify-content: space-between;
+    }
+
+    & > div {
+      width: 100%;
     }
   }
 `
@@ -143,8 +144,7 @@ export const Description = styled.div`
   @media screen and (max-width: 900px) {
     & {
       width: 100%;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
+      justify-content: space-evenly;
     }
   }
 `

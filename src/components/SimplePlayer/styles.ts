@@ -4,13 +4,21 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10rem;
 
   .audioPlayer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 700px;
+    width: 15rem;
+    font-size: 0.8rem;
+  }
+
+  .audioPlayer::after {
+    content: '';
+    margin: 0 0.5rem;
+    width: 2px;
+    height: 0.8rem;
+    background-color: ${(props) => props.theme['gray-700']};
   }
 
   button {
@@ -19,6 +27,12 @@ export const Container = styled.div`
 
     svg {
       color: ${(props) => props.theme['gray-500']};
+    }
+  }
+
+  .playPause {
+    svg {
+      animation: color 2s cubic-bezier(0.165, 0.84, 0.44, 1) 50ms infinite;
     }
   }
 
@@ -35,14 +49,14 @@ export const Container = styled.div`
   }
 
   .progressBar {
-    --seek-before-width: 100px;
+    --seek-before-width: 0px;
 
     appearance: none;
     background: ${(props) => props.theme['gray-700']};
     border-radius: 10px;
     position: relative;
     width: 100%;
-    height: 0.5rem;
+    height: 0.2rem;
     outline: none;
     cursor: pointer;
   }
@@ -53,7 +67,7 @@ export const Container = styled.div`
     border-radius: 10px;
     position: relative;
     width: 100%;
-    height: 0.5rem;
+    height: 0.2rem;
     outline: none;
   }
 
@@ -63,7 +77,7 @@ export const Container = styled.div`
     border-radius: 10px;
     position: relative;
     width: 100%;
-    height: 0.5rem;
+    height: 0.2rem;
     outline: none;
   }
 
@@ -74,7 +88,7 @@ export const Container = styled.div`
   /* chrome and safari */
   .progressBar::before {
     content: '';
-    height: 0.5rem;
+    height: 0.2rem;
     width: var(--seek-before-width);
     background-color: ${(props) => props.theme.gold};
     border-top-left-radius: 10px;
@@ -96,13 +110,13 @@ export const Container = styled.div`
 
   /* knobby chrome and safari */
   .progressBar::-webkit-slider-thumb {
-    --webkit-appearance: none;
-    height: 0.5rem;
-    width: 0.5rem;
+    -webkit-appearance: none;
+    height: 0.2rem;
+    width: 0.2rem;
     border-radius: 50%;
     border: none;
     background-color: ${(props) => props.theme.gold};
-    margin-top: -2px;
+    margin-left: -2px;
     z-index: 3;
     box-sizing: border-box;
   }
@@ -128,5 +142,74 @@ export const Container = styled.div`
   .progressBar:active::-moz-range-thumb {
     transform: scale(1.1);
     background-color: ${(props) => props.theme['yellow-700']};
+  }
+
+  .likeButtonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    svg {
+      position: relative;
+      transition: 300ms;
+      animation: slideIn 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) 50ms infinite;
+    }
+  }
+
+  .likeButtonFilled {
+    svg {
+      color: ${(props) => props.theme.gold};
+    }
+  }
+
+  .likeButtonOutline {
+    svg {
+      color: ${(props) => props.theme['gray-600']};
+    }
+  }
+
+  @keyframes slideIn {
+    20% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.2);
+    }
+    50% {
+      transform: scale(1);
+    }
+    60% {
+      transform: scale(1.2);
+    }
+    80% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes color {
+    0% {
+      color: ${(props) => props.theme['gray-600']};
+    }
+    50% {
+      color: ${(props) => props.theme.gold};
+    }
+    100% {
+      color: ${(props) => props.theme['gray-600']};
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .audioPlayer {
+      width: 100%;
+      justify-content: space-evenly;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .audioPlayer {
+      width: 100%;
+      justify-content: space-evenly;
+    }
   }
 `
