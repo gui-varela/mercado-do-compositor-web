@@ -26,6 +26,11 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Frank Ruhl Libre', serif;
   }
 
+  h1, h2, h3, h4, p, span {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   button {
     cursor: pointer;
     border: none;

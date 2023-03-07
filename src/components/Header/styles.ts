@@ -23,6 +23,11 @@ export const Container = styled.div`
 
     img {
       height: 5rem;
+      cursor: pointer;
+    }
+
+    svg {
+      cursor: pointer;
     }
   }
 
@@ -46,6 +51,7 @@ export const Container = styled.div`
       padding: 0 0.1rem;
       border: 2px solid ${(props) => props.theme.gold};
       border-radius: 2px;
+      cursor: pointer;
 
       svg {
         margin-left: 0.1rem;
@@ -54,6 +60,24 @@ export const Container = styled.div`
       .NotebookEdge {
         height: 100%;
         border-right: 2px solid ${(props) => props.theme.gold};
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    header {
+      padding: 0 2rem;
+
+      .Options {
+        display: flex;
+        justify-content: space-between;
+        width: 5rem;
+      }
+
+      img,
+      svg,
+      .Notebook {
+        scale: 0.7;
       }
     }
   }

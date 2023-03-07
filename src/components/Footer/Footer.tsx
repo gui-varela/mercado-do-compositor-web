@@ -9,7 +9,7 @@ export function Footer() {
     <Container>
       <Player>
         <footer>
-          <div className="Titulo">
+          <div className="Title">
             <Star />
             <h2>Música em destaque</h2>
           </div>
@@ -24,10 +24,10 @@ export function Footer() {
               <span>João Paulo</span>
             </div>
 
-            <div className="HorizontalDivider"></div>
+            <div id="mobileDivider" className="HorizontalDivider"></div>
             <p>Nome da música</p>
             <div className="HorizontalDivider"></div>
-            <span>Samba</span>
+            <span className="kindOfMusic">Samba</span>
           </Description>
 
           <div className="VerticalDivider"></div>

@@ -6,7 +6,7 @@ export function Home() {
     <Container>
       <main>
         <div className="Content">
-          <h1>Ache a música ideal para o seu projeto</h1>
+          <h1>Encontre a música ideal para o seu projeto</h1>
           <p>Um site que reune um acervo de músicas, trilhas e fonias.</p>
           <button>
             <MagnifyingGlass weight="bold" />

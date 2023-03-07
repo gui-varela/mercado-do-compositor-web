@@ -17,11 +17,12 @@ export const Container = styled.div`
     color: ${(props) => props.theme.gold};
   }
 
-  .Titulo {
+  .Title {
     display: flex;
 
     svg {
       margin-right: 0.5rem;
+      animation: rotation 5s cubic-bezier(0.165, 0.84, 0.44, 1) 50ms infinite;
     }
 
     h2 {
@@ -54,6 +55,8 @@ export const Container = styled.div`
   @media screen and (max-width: 900px) {
     footer {
       flex-direction: column;
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
   }
 
@@ -145,6 +148,34 @@ export const Description = styled.div`
     & {
       width: 100%;
       justify-content: space-evenly;
+
+      .Artist {
+      }
+
+      #mobileDivider {
+        display: block;
+        width: 1px;
+        height: 1rem;
+        margin: 0 0.6rem;
+        background-color: ${(props) => props.theme['gray-700']};
+      }
+
+      .HorizontalDivider,
+      .kindOfMusic {
+        display: none;
+      }
+    }
+  }
+
+  @keyframes rotation {
+    10% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(360deg);
+    }
+    90% {
+      transform: rotate(0deg);
     }
   }
 `

@@ -205,11 +205,4 @@ export const Container = styled.div`
       justify-content: space-evenly;
     }
   }
-
-  @media screen and (max-width: 900px) {
-    .audioPlayer {
-      width: 100%;
-      justify-content: space-evenly;
-    }
-  }
 `
